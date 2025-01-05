@@ -1,0 +1,42 @@
+name: Build, Test, and Publish to PyPI
+
+on:
+  release:
+    types: [published] # Trigger on new release
+  workflow_dispatch: # Allow manual trigger from GitHub
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12.8" # Use a recent Python version
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install hatch pytest
+          pip install .  # Install the package locally for testing
+
+      - name: Run Tests
+        run: pytest tests/
+
+  build-and-publish:
+    needs: test # Only publish if tests pass
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # For trusted publishing to PyPI
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python

@@ -1,0 +1,71 @@
+target-version = "py312"
+line-length = 100
+
+[format]
+preview = true
+docstring-code-format = true
+
+[lint]
+select = [
+    "A",   # Built-in functions checks
+    "B",   # Bugbear (common Python bugs)
+    "C",   # Comprehensions improvements
+    "E",   # Pyflakes errors
+    "F",   # Pyflakes warnings
+    "I",   # isort (import sorting)
+    "N",   # pep8-naming
+    "Q",   # flake8-quotes
+    "S",   # Security checks
+    "UP",  # pyupgrade
+    "D",   # Docstring-related rules
+    "C4",  # flake8-comprehensions
+    "PLC", # pylint conventions
+    "PLE", # pylint errors
+    "PLR", # pylint refactoring
+    "PLW", # pylint warnings
+]
+extend-select = [
+    "ANN001", # Missing type annotation for function argument
+    "ANN002", # Missing type annotation for function return
+    "ANN003", # Missing type annotation for class members
+    "D401",   # First line should be imperative
+    "D205",   # Blank line between summary and description
+    "D410",   # Blank line before/after docstring sections
+    "S101",   # Avoid assert outside of tests
+    "S301",   # Warn on unsafe `pickle`
+    "S306",   # Unsafe XML parsing
+    "S307",   # Warn on untrusted JSON `json.loads()`
+]
+ignore = [
+    "D100",    # Ignore missing docstring for public modules
+    "D101",    # Ignore missing docstring for public classes
+    "D102",    # Ignore missing docstring for public methods
+    "D103",    # Ignore missing docstring for public functions
+    "D104",    # Ignore missing docstring for public packages
+    "D105",    # Ignore missing docstring for magic methods
+    "D107",    # Ignore missing docstring for __init__ methods
+    "D200",    # Allow docstring to start on the first line
+    "D212",    # Allow multi-line docstring to have summary on the second line
+    "D400",    # Allow first line to end without a period
+    "S104",    # Allow use of `subprocess`
+    "S105",    # Allow use of `os.system`
+    "S106",    # Allow `sys.exit` calls
+    "S108",    # Allow `socket` usage
+    "ANN001",  # Ignore missing type annotations
+    "ANN101",  # Ignore missing self/cls type annotations
+    "ANN201",  # Ignore missing return type for class methods
+    "ANN401",  # Skip complex class attribute type hints
+    "E501",    # Ignore line length (typically handled by formatter)
+    "E731",    # Allow lambda assignment
+    "PLR0911", # Too many return statements
+    "PLR0912", # Too many branches
+    "PLR0913", # Too many function arguments
+    "PLR0915", # Too many statements
+    "PLR0916", # Too many boolean expressions
+]
+
+[lint.per-file-ignores]
+"tests/*" = ["S101"] # Allow assert statements in tests
+
+[lint.pydocstyle]
+convention = "numpy"

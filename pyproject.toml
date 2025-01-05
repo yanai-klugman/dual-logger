@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dual-logging"
+version = "0.1.0"
+authors = [{ name = "Yanai Klugman", email = "yanaiklugman@gmail.com" }]
+description = "A dual asynchronous logger for console and file outputs with Rich and Structlog."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+dependencies = [
+    "aiofiles>=24.1.0",
+    "extensions>=0.4",
+    "hatch>=1.14.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.1",
+    "rich>=13.9.4",
+    "structlog>=24.4.0",
+]
+classifiers = [
+    "Typing :: Typed",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+]
+
+[tool.uv]
+link-mode = "copy"
+
+[tool.black]
+line-length = 100
+
+[project.urls]
+Homepage = "https://github.com/yanaiklugman/dual-logging"
+Repository = "https://github.com/yanaiklugman/dual-logging"
+Issues = "https://github.com/yourname/dual_logging/issues"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/dual_logger/**", "README.md", "LICENSE"]
+
+[tool.hatch.build.targets.wheel]
+include = ["src/dual_logging/**"]
+
+[tool.hatch.version]
+path = "src/dual_logging/__init__.py"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[project.scripts]
+demo-logger = "dual_logging.demo:sync_entry"
